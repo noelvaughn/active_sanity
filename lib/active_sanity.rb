@@ -1,0 +1,3 @@
+module ActiveSanity
+  # Your code goes here...
+end
