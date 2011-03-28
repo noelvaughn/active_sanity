@@ -1,3 +1,7 @@
 module ActiveSanity
-  # Your code goes here...
+  require File.dirname(__FILE__) + '/active_sanity/railtie'
+
+  def self.check!
+    puts "Sanity Check"
+  end
 end
