@@ -95,6 +95,8 @@ Then /^the table "([^"]*)" should contain:$/ do |_, table|
         #   - :username: can't be blank
         #   - :username: is too short (minimum is 3 characters)
         #
+        #   https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/6646-orderedhash-serialization-does-not-work-when-storing-arrays
+        #
         # You actually get the last error on an attribute only
         # 
         invalid_record.validation_errors[k].should == v.last
