@@ -15,6 +15,7 @@ user_code = <<-CODE
   has_many :posts, :foreign_key => 'author_id'
 
   validates_presence_of :first_name, :last_name, :username
+  validates_length_of :username, :minimum => 3
 CODE
 inject_into_file 'app/models/user.rb', user_code, :after => "class User < ActiveRecord::Base\n"
 

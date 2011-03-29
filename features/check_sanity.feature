@@ -5,7 +5,7 @@ Feature: Check sanity
   I want to run 'rake db:check_sanity' and see which records are invalid
 
   Background:
-    Given I have a rails app with a Gemfile requiring 'active_sanity'
+    Given I have a rails app using 'active_sanity'
 
   Scenario: Check sanity on empty database
     When I run "rake db:check_sanity"
@@ -22,5 +22,5 @@ Feature: Check sanity
     And the first user's username is empty and the first post category_id is nil
     When I run "rake db:check_sanity --trace"
     Then I should see the following invalid records:
-      | User     | 1 | {:username=>["can't be blank"]} |
+      | User     | 1 | {:username=>["can't be blank", "is too short (minimum is 3 characters)"]} |
       | Post     | 1 | {:category=>["can't be blank"]} |
