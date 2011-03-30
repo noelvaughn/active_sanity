@@ -13,11 +13,7 @@ module ActiveSanity
     end
 
     def models
-      @models ||= Dir["#{Rails.root}/app/models/**/*.rb"].map do |file_path|
-        basename  = File.basename(file_path, File.extname(file_path))
-        klass     = basename.camelize.constantize
-        klass.new.is_a?(ActiveRecord::Base) ? klass : nil
-      end.compact
+      @models ||= ActiveRecord::Base.subclasses
     end
 
     protected
@@ -32,10 +28,17 @@ module ActiveSanity
 
     def check_all_records
       models.each do |model|
-        model.find_each do |record|
-          unless record.valid?
-            invalid_record!(record)
+        begin
+          model.find_each do |record|
+            unless record.valid?
+              invalid_record!(record)
+            end
           end
+        rescue => e
+          # Rescue from exceptions that might happen when you load
+          # a record. Yep, that might happen. :-/
+          puts e.message
+          puts "Skipping validations for #{model}"
         end
       end
     end
