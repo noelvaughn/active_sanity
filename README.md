@@ -18,7 +18,7 @@ If you wish to store invalid records in your database run:
 
 Just run:
 
-    rake db:sanity_check
+    rake db:check_sanity
 
 ActiveSanity will iterate over every records of all your models to check
 weither they're valid or not. It will save invalid records in the table
