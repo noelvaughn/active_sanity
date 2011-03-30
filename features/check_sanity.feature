@@ -20,7 +20,7 @@ Feature: Check sanity
   Scenario: Check sanity on database with invalid records
     Given the database contains a few valid records
     And the first user's username is empty and the first post category_id is nil
-    When I run "rake db:check_sanity --trace"
+    When I run "rake db:check_sanity"
     Then I should see the following invalid records:
       | User     | 1 | {:username=>["can't be blank", "is too short (minimum is 3 characters)"]} |
       | Post     | 1 | {:category=>["can't be blank"]} |
