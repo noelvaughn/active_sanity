@@ -9,7 +9,7 @@ Feature: Check sanity with db storage
 
   Scenario: Check sanity on empty database
     When I run "rake db:check_sanity"
-    Then I should see "Checking the following models: Category, Post, User"
+    Then I should see "Checking the following models: InvalidRecord, Category, Post, User"
     Then the table "invalid_records" should be empty
 
   Scenario: Check sanity on database with valid records

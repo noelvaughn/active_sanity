@@ -13,7 +13,13 @@ module ActiveSanity
     end
 
     def models
-      @models ||= ActiveRecord::Base.subclasses
+      # Ensure ActiveRecord::Base is aware of all models under
+      # app/models
+      Dir["#{Rails.root}/app/models/**/*.rb"].each do |file_path|
+        require file_path rescue nil
+      end
+      
+      @models ||= ActiveRecord::Base.subclasses 
     end
 
     protected
@@ -35,8 +41,8 @@ module ActiveSanity
             end
           end
         rescue => e
-          # Rescue from exceptions that might happen when you load
-          # a record. Yep, that might happen. :-/
+          # Rescue from exceptions (table does not exists,
+          # deserialization error, ...)
           puts e.message
           puts "Skipping validations for #{model}"
         end
