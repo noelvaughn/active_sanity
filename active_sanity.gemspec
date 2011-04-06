@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Performs a Sanity Check of your database by logging all invalid Active Records}
   s.homepage    = "https://github.com/versapay/active_sanity"
 
-  s.add_dependency "rails", ">=3.0.0"
+#  s.add_dependency "rails", ">=3.0.0"
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "cucumber"
